@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom/client';
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
@@ -10,7 +11,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/api/login', { username, password });
+            const res = await axios.post('http://localhost:3000', { username, password });
             localStorage.setItem('token', res.data.token);
             setError('');
             alert('Login successful!');
