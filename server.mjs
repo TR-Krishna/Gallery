@@ -18,15 +18,13 @@ const db = new pg.Client({
 
 db.connect();
 
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3001;
 
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 cloudinary.v2.config({
   cloud_name: 'dfir5drnr',
@@ -44,9 +42,6 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage });
 
-
-
-
 async function registerUser(username, password) {
   await db.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password]);
 }
@@ -54,13 +49,11 @@ async function registerUser(username, password) {
 async function check(username, password) {
   try {
     const result = await db.query('SELECT * FROM users WHERE username = $1', [username]);
-    
     if (result.rows.length > 0) {
       const user = result.rows[0];
       console.log(`Stored password: ${user.password}`);
       return user.password === password;
     }
-    
     console.log('No user found');
     return false;
   } catch (err) {
@@ -68,9 +61,11 @@ async function check(username, password) {
     return false;
   }
 }
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+
+app.get('/welcome', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
 });
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   console.log(`Received login request: username=${username}, password=${password}`);
@@ -82,6 +77,7 @@ app.post('/login', async (req, res) => {
     res.status(401).json({ message: 'Invalid username or password!' });
   }
 });
+
 app.post('/upload', upload.single('file'), (req, res) => {
   try {
     const fileUrl = req.file.path;
@@ -93,11 +89,9 @@ app.post('/upload', upload.single('file'), (req, res) => {
   }
 });
 
+// Serve static files (like the login page)
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
