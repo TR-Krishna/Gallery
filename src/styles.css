@@ -1,0 +1,33 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: center;
+    height: 100vh;
+    background-color:#b9ccd7;
+   
+  }
+  
+button
+{
+  font-family:'Courier New', Courier, monospace;
+  font-size:15px; 
+  
+}
+  
+  input[type="file"] {
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: center;
+    background-color: #b9ccd7;
+    fonr: size 15px;
+    margin: 20px 0;
+    
+  }
+  img {
+    border-radius:30px;
+    max-width: 100%;
+    height: auto;
+  }
+  
