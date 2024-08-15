@@ -9,10 +9,10 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import cors from 'cors';
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "world",
-  password: "$crucio$",
+  user: "",
+  host: "",
+  database: "",
+  password:"",
   port: 5432,
 });
 
@@ -27,9 +27,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 cloudinary.v2.config({
-  cloud_name: 'dfir5drnr',
-  api_key: '355786555135944',
-  api_secret: 'Vqz4K5t42zWcA4tcWN1CCg-mGeo',
+  cloud_name: '',
+  api_key: '',
+  api_secret: '',
 });
 
 const storage = new CloudinaryStorage({
