@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import config from './config/configurl';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3001/login', { username, password });
+      const res = await axios.post(`${config.URL}/login`, { username, password });
       localStorage.setItem('token', res.data.token);
       setError('');
       alert('Login successful!');

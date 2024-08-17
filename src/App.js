@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './Login';
-import Upload from './Upload';
+import Login from './Login.jsx';
+import Upload from './Upload.jsx';
 
 function App() {
   const isAuthenticated = !!localStorage.getItem('token'); 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 import './styles.css';
+import config from './config/configurl';
 
 const Upload = () => {
   const [file, setFile] = useState("");
@@ -32,11 +33,12 @@ const Upload = () => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post('http://localhost:3001/upload', formData, {
+      const res = await axios.post(`${config.URL}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      alert('Upload successful!');
       setImageUrl(res.data.url);
     } catch (err) {
       console.error('Error uploading image:', err);
