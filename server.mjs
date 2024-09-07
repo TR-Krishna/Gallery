@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import authRoutes from './src/express/authr.js';
 import uploadRoutes from './src/express/load.js';
+import galleryRoutes from './src/express/gallery.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -16,7 +17,8 @@ app.use(express.json());
 
 
 app.use('/', authRoutes);
-app.use('/', uploadRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/gallery',galleryRoutes);
 
 
 app.use(express.static(path.join(__dirname, 'public')));

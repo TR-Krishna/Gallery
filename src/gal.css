@@ -1,0 +1,27 @@
+.gallery-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Poppins';
+  background-color: #b9ccd7;
+  height: 100vh;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.gallery-item {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-item img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+}
