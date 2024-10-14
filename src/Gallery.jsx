@@ -5,8 +5,6 @@ import config from './config/configurl';
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -14,16 +12,12 @@ const Gallery = () => {
         const res = await axios.get(`${config.URL}/gallery`);
         setImages(res.data);
       } catch (err) {
-        setError('Error fetching images');
         console.error('Error fetching images:', err);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchImages();
   }, []);
-
 
   return (
     <div className="gallery-container">

@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
-import { createRoot } from 'react-dom/client';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 import config from './config/configurl';
 
 const Upload = () => {
   const [file, setFile] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [uploadSuccessful, setUploadSuccessful] = useState(false);
+  const navigate = useNavigate();
 
-  function previewFiles(file)
-  {
-    const reader=new FileReader();
+  const previewFiles = (file) => {
+    const reader = new FileReader();
     reader.readAsDataURL(file);
 
-    reader.onloadend=()=>{
-      console.log(imageUrl);
+    reader.onloadend = () => {
       setImageUrl(reader.result);
-    }
+    };
+  };
 
-  }
   const handleFileChange = (e) => {
-    const file=(e.target.files[0]);
+    const file = e.target.files[0];
     setFile(file);
-    console.log(file);
-
     previewFiles(file);
   };
 
@@ -33,16 +31,20 @@ const Upload = () => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post(`${config.URL}/upload`, formData, {
+      await axios.post(`${config.URL}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       alert('Upload successful!');
-      setImageUrl(res.data.url);
+      setUploadSuccessful(true);
     } catch (err) {
       console.error('Error uploading image:', err);
     }
+  };
+
+  const handleViewGallery = () => {
+    navigate('/gallery');
   };
 
   return (
@@ -57,6 +59,9 @@ const Upload = () => {
           <h3>Uploaded Image:</h3>
           <img src={imageUrl} alt="Uploaded" />
         </div>
+      )}
+      {uploadSuccessful && (
+        <button onClick={handleViewGallery}>View Gallery</button>
       )}
     </div>
   );

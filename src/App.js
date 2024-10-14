@@ -10,10 +10,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/upload" /> : <Login />} />
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/upload" /> : <Login />} />
-        <Route path="/upload" element={isAuthenticated ? <Upload /> : <Navigate to="/gallery" />} />
-        <Route path="/gallery" element={isAuthenticated ? <Gallery /> : <Navigate to="/login" />} /> 
+        <Route path="/" element={isAuthenticated ?<Login/>  : <Navigate to="/upload" />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/login" /> : <Login />} />
+        <Route path="/upload" element={isAuthenticated ? <Upload /> : <Navigate to="/login" />} />
+        <Route path="/gallery" element={isAuthenticated ? <Gallery /> : <Navigate to="/login" />} />
       </Routes>
     </Router>
   );
